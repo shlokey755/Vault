@@ -1,4 +1,4 @@
-# Vault 💰
+# ◈ Vault 
 
 [![GitHub License](https://img.shields.io/github/license/shlokey755/Vault?color=blue)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/shlokey755/Vault)](https://github.com/shlokey755/Vault/stargazers)
