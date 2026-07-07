@@ -1,286 +1,84 @@
-# 💎 Vault — Money Manager
+# Vault 💰
 
-A sleek, modern personal finance manager for tracking income and expenses with beautiful charts and analytics. **Now available as a Progressive Web App (PWA)** — install it like a native app!
+[![GitHub License](https://img.shields.io/github/license/shlokey755/Vault?color=blue)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/shlokey755/Vault)](https://github.com/shlokey755/Vault/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/shlokey755/Vault)](https://github.com/shlokey755/Vault/issues)
 
----
+Vault is a lightweight, serverless personal finance tracker built entirely using standard web technologies (**HTML5, CSS3, and vanilla JavaScript**). Operating completely on the client side, Vault ensures your financial logs remain entirely private, handling and rendering your data right in your browser.
 
-## ✨ Features
-
-### 💰 Core Functionality
-- **Track Income & Expenses** — Categorize and record all transactions
-- **Real-time Analytics** — Visual charts showing income vs expenses and breakdown by category
-- **Smart Filtering** — Filter by category, date range, and more
-- **CSV Export** — Download your transaction history as CSV for backup or analysis
-- **Responsive Design** — Works perfectly on desktop, tablet, and mobile
-
-### 📊 Visual Insights
-- **Income vs Expenses Chart** — Bar chart comparing total income and expenses
-- **Expense Breakdown Chart** — Donut chart showing where your money goes
-- **Summary Cards** — Quick view of Total Income, Net Balance, and Total Expenses
-- **Transaction Table** — Complete history with date, category, amount, and actions
-
-### 🎯 Smart Categorization
-- **Income Categories:** Salary, Allowances, Bonus, Petty Cash
-- **Expense Categories:** Rent, Food, Shopping, Entertainment
-- **Custom Descriptions** — Add notes to track details (max 100 characters)
-- **Sub-categories** — Organize expenses by specific type
-
-### 🚀 PWA (Progressive Web App)
-- **Install as Native App** — Add to home screen or start menu
-- **Offline Support** — Access your data without internet
-- **Instant Loading** — Cached assets load in milliseconds
-- **No App Store Needed** — Install directly from the browser
+[**Explore the Live Demo »**](https://shlokey755.github.io/Vault/)
 
 ---
 
-## 🖥️ Installation
+## 📷 Screenshots
 
-### Desktop (Chrome/Edge)
-1. Visit: [https://shlokey755.github.io/Vault/](https://shlokey755.github.io/Vault/)
-2. Look for the **Install button** in the address bar (right side)
-3. Click **Install**
-4. App opens in a window like a native application
-
-### Mobile (Android)
-1. Open in **Chrome** browser
-2. Tap the **⋮ menu** (three dots, top right)
-3. Tap **"Install app"** or **"Add to Home Screen"**
-4. App appears on your home screen
-
-### Mobile (iOS/Safari)
-1. Open in **Safari** browser
-2. Tap the **Share** button
-3. Tap **"Add to Home Screen"**
-4. App opens fullscreen without browser UI
+| Dashboard View | Analytics & Charts |
+| :---: | :---: |
+| <img width="1487" height="962" alt="image" src="https://github.com/user-attachments/assets/a39bb3d7-86e1-44ad-b8b4-c4ee79342235" /> | <img width="600" height="620" alt="image" src="https://github.com/user-attachments/assets/90b9e1f4-17a8-4cc8-accf-9fcf6d8ad44d" /> |
 
 ---
 
-## 🎮 How to Use
+## ✨ Key Features
 
-### Adding a Transaction
-1. Click **"+ Add Transaction"** button (top right)
-2. Fill in the form:
-   - **Amount** — How much (required)
-   - **Date** — When it happened (required, can't be future)
-   - **Category** — Income or Expense (required)
-   - **Sub-Category** — Specific type (required)
-   - **Description** — Optional note (max 100 chars)
-3. Click **"Add Transaction"**
-4. Charts update instantly!
-
-### Editing a Transaction
-1. Find the transaction in the table
-2. Click the **Edit** button
-3. Modify the fields
-4. Click **"Update Transaction"**
-
-### Deleting a Transaction
-1. Find the transaction in the table
-2. Click the **Delete** button
-3. Confirm in the popup
-4. Transaction is removed
-
-### Filtering & Sorting
-- **Category Filter** — Show Income, Expense, or All
-- **Sub-Category Filter** — Filter by specific type
-- **Date Range** — Filter between two dates
-- **Sort Options:**
-  - Date: Newest First (default)
-  - Date: Oldest First
-  - Amount: High → Low
-  - Amount: Low → High
-- Click **Reset** to clear all filters
-
-### Exporting Data
-1. Click **"Export CSV"** button (top left)
-2. File downloads as `vault_transactions_YYYY-MM-DD.csv`
-3. Open in Excel, Google Sheets, or any spreadsheet app
+*   💾 **Persistent Local Storage:** Your budget data stays where it belongs—with you. Vault automatically saves your transaction logs to your browser's `LocalStorage`, meaning your history is preserved across tab closes and page refreshes.
+*   ➕ **Quick Transaction Logging:** Seamlessly add daily income and expenses, complete with category selection, dates, amounts, and notes.
+*   📊 **Dynamic Data Visualization:** Instantly interpret your financial health through interactive visual charts, helping you identify spending patterns and trends at a glance.
+*   📥 **One-Click CSV Export:** Export your entire ledger into a clean `.csv` file format ready to import directly into Excel, Google Sheets, or any other financial tool.
+*   ⚡ **Zero Server Overhead:** Completely standalone. No databases, cloud setups, accounts, or complex backend requirements.
 
 ---
 
-## 📱 Offline Support
+## 🛠️ Built With
 
-Your Vault app works **completely offline** thanks to PWA technology:
-
-- ✅ **View existing transactions** without internet
-- ✅ **Access charts and analytics** with cached data
-- ✅ **Use all features** while offline
-- ✅ **Data syncs when online** automatically
-
-**Note:** Data is stored locally in your browser (localStorage). It persists across sessions.
+*   ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white) — Semantic markup and structure.
+*   ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=flat&logo=css3&logoColor=white) — Clean, responsive layouts for mobile and desktop screens.
+*   ![JavaScript](https://img.shields.io/badge/javascript-%23F7DF1E.svg?style=flat&logo=javascript&logoColor=black) — DOM manipulation, state management, calculation logic, and CSV rendering.
+*   *(Note: If you used an open-source library like Chart.js or FontAwesome, you can list them here!)*
 
 ---
 
-## 🏗️ Architecture
+## 📦 How to Run Locally
 
-### Frontend Stack
-- **HTML5** — Semantic markup with ARIA accessibility
-- **CSS3** — Mobile-first responsive design with dark theme
-- **JavaScript (ES6+)** — Modular class-based architecture
-- **Chart.js** — Beautiful interactive charts
+Because Vault is built purely with vanilla web languages, you do not need to install complex dependencies or node packages.
 
-### Key Classes
-- **Transaction** — Data model for a single transaction
-- **StorageManager** — Handles localStorage persistence
-- **TransactionManager** — Business logic (CRUD operations)
-- **UIManager** — DOM manipulation and modal management
-- **ChartManager** — Initializes and updates charts
-- **FilterManager** — Manages filter and sort state
-- **FormValidator** — Validates transaction form
-- **ExportManager** — Handles CSV export
+### Prerequisites
+A modern web browser (Chrome, Firefox, Safari, Edge, etc.)
 
-### Storage
-- **LocalStorage** — Persists all transactions and settings
-- **Service Worker Cache** — Caches app assets for offline access
+### Steps
 
----
+1. **Clone the Repository**
+   ```bash
+   git clone [https://github.com/shlokey755/Vault.git](https://github.com/shlokey755/Vault.git)
+Navigate into the directory
 
-## 🔒 Privacy & Security
+Bash
+cd Vault
+Launch the Application
+Simply double-click the index.html file to open it in your default browser, or serve it using an extension like VS Code's Live Server.
 
-- ✅ **No backend server** — All data stays on your device
-- ✅ **No cloud sync** — Your financial data is private
-- ✅ **No tracking** — No analytics or user tracking
-- ✅ **HTTPS only** — All communications encrypted
-- ✅ **Open source** — Code is transparent and auditable
+🔒 Privacy & Security
+Vault operates on a strict zero-knowledge, offline-first principle:
 
----
+No analytical tracking or external ad scripts.
 
-## 🎨 Design
+No remote database storage; everything stays inside your browser environment.
 
-### Theme
-- **Dark Mode** — Easy on the eyes, modern aesthetic
-- **Color Palette:**
-  - Primary: Deep Navy (#1a1a2e)
-  - Accent: Gold (#ffd700)
-  - Income: Green (#2ecc71)
-  - Expense: Red (#e74c3c)
+Clearing your browser cache/cookies for this site will wipe the data, so make sure to use the CSV Export feature to back up your logs regularly!
 
-### Typography
-- **Serif** (Cormorant Garamond) — Headings, elegant look
-- **Sans-serif** (Syne) — Body text, clean readability
+🤝 Contributing
+Contributions are welcome! If you want to enhance Vault, feel free to fork the repository and submit a pull request.
 
-### Responsive Breakpoints
-- **Mobile** — 320px and up
-- **Tablet** — 768px and up
-- **Desktop** — 1024px and up
+Fork the Project
+
+Create your Feature Branch (git checkout -b feature/AmazingFeature)
+
+Commit your Changes (git commit -m 'Add some AmazingFeature')
+
+Push to the Branch (git push origin feature/AmazingFeature)
+
+Open a Pull Request
+
+📄 License
+This project is free for use.
 
 ---
-
-## 📊 Categories & Sub-Categories
-
-### Income Types
-- **Salary** — Regular employment income
-- **Allowances** — Gifts or allowances received
-- **Bonus** — Performance bonuses or windfalls
-- **Petty Cash** — Small income sources
-
-### Expense Types
-- **Rent** — Housing costs
-- **Food** — Groceries and dining
-- **Shopping** — General shopping and purchases
-- **Entertainment** — Fun and leisure activities
-
----
-
-## 🚀 Browser Support
-
-| Browser | Desktop | Mobile |
-|---------|---------|--------|
-| Chrome | ✅ Full | ✅ Full |
-| Edge | ✅ Full | ✅ Full |
-| Firefox | ✅ Full | ✅ Full |
-| Safari | ✅ Full | ⚠️ Limited |
-
-**Note:** Safari on iOS has limited PWA support but works well as a home screen shortcut.
-
----
-
-## 📈 Future Roadmap
-
-- [ ] Budget planning and alerts
-- [ ] Recurring transactions
-- [ ] Multi-currency support
-- [ ] Data backup to cloud
-- [ ] Family/shared accounts
-- [ ] Advanced reports and trends
-- [ ] Dark/light theme toggle
-- [ ] Custom categories
-
----
-
-## 🐛 Known Issues
-
-- None currently! Please report bugs via GitHub Issues.
-
----
-
-## 💡 Tips & Tricks
-
-1. **Quick Add** — Use the home screen shortcut to quickly add transactions
-2. **Backup Data** — Regularly export to CSV for backup
-3. **Mobile Gesture** — Swipe down to refresh data
-4. **Keyboard Shortcuts** — Press `Esc` to close modals
-5. **Offline Access** — All data cached, works without internet
-
----
-
-## 📄 License
-
-Open source — feel free to use, modify, and share!
-
----
-
-## 🤝 Contributing
-
-Found a bug? Have a suggestion?
-
-1. Create an issue on GitHub
-2. Describe the problem clearly
-3. Include screenshots if possible
-4. We'll review and fix ASAP!
-
----
-
-## 📞 Support
-
-For questions or issues:
-1. Check the FAQ section below
-2. Review existing GitHub issues
-3. Create a new issue with details
-
----
-
-## ❓ FAQ
-
-**Q: Is my data safe?**  
-A: Completely! Data never leaves your device. We don't have servers or cloud storage.
-
-**Q: Can I sync across devices?**  
-A: Currently each device has its own data. We're working on optional cloud sync.
-
-**Q: What happens if I clear browser data?**  
-A: All transactions are deleted. Always export to CSV for backup!
-
-**Q: Can I use this offline?**  
-A: Yes! Install as PWA and it works completely offline with cached data.
-
-**Q: Is this better than spreadsheets?**  
-A: Yes! Visual charts, instant filtering, mobile-friendly, and automatic calculations.
-
-**Q: Can I change the categories?**  
-A: Currently categories are fixed, but we're planning customizable categories.
-
-**Q: How do I uninstall?**  
-A: Desktop: Uninstall like any app. Mobile: Long-press app → Remove from home screen.
-
----
-
-## 🎉 Enjoy Managing Your Finances!
-
-Download, install, and start tracking your money today. Your financial health starts here.
-
-**[Install Vault Now →](https://shlokey755.github.io/Vault/)**
-
----
-
-**Made with 💎 and JavaScript**
