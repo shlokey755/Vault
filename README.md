@@ -1,9 +1,5 @@
 # ◈ Vault 
 
-[![GitHub License](https://img.shields.io/github/license/shlokey755/Vault?color=blue)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/shlokey755/Vault)](https://github.com/shlokey755/Vault/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/shlokey755/Vault)](https://github.com/shlokey755/Vault/issues)
-
 Vault is a lightweight, serverless personal finance tracker built entirely using standard web technologies (**HTML5, CSS3, and vanilla JavaScript**). Operating completely on the client side, Vault ensures your financial logs remain entirely private, handling and rendering your data right in your browser.
 
 [**Explore the Live Demo »**](https://shlokey755.github.io/Vault/)
@@ -33,7 +29,7 @@ Vault is a lightweight, serverless personal finance tracker built entirely using
 *   ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white) — Semantic markup and structure.
 *   ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=flat&logo=css3&logoColor=white) — Clean, responsive layouts for mobile and desktop screens.
 *   ![JavaScript](https://img.shields.io/badge/javascript-%23F7DF1E.svg?style=flat&logo=javascript&logoColor=black) — DOM manipulation, state management, calculation logic, and CSV rendering.
-*   *(Note: If you used an open-source library like Chart.js or FontAwesome, you can list them here!)*
+
 
 ---
 
