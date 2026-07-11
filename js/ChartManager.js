@@ -4,8 +4,9 @@
  */
 export class ChartManager {
   constructor() {
-    this._barChart  = null;
-    this._pieChart  = null;
+    this._barChart = null;
+    this._incomePieChart = null;
+    this._pieChart = null;
 
     // Resolve Chart from the global window object explicitly to bypass ES Module namespace issues
     const GlobalChart = window.Chart;
@@ -18,9 +19,10 @@ export class ChartManager {
     // Common chart defaults (dark theme) using the resolved global reference
     GlobalChart.defaults.color = '#8a8790';
     GlobalChart.defaults.font.family = "'Syne', sans-serif";
-    GlobalChart.defaults.font.size   = 12;
+    GlobalChart.defaults.font.size = 12;
 
     this._initBarChart(GlobalChart);
+    this._initIncomePieChart(GlobalChart);
     this._initPieChart(GlobalChart);
   }
 
@@ -35,19 +37,19 @@ export class ChartManager {
       data: {
         labels: ['Income', 'Expenses'],
         datasets: [{
-          data:            [0, 0],
+          data: [0, 0],
           backgroundColor: ['rgba(76,175,138,0.7)', 'rgba(224,92,92,0.7)'],
-          borderColor:     ['#4caf8a', '#e05c5c'],
-          borderWidth:     1,
-          borderRadius:    6,
-          borderSkipped:   false,
+          borderColor: ['#4caf8a', '#e05c5c'],
+          borderWidth: 1,
+          borderRadius: 6,
+          borderSkipped: false,
         }],
       },
       options: {
-        responsive:          true,
+        responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend:  { display: false },
+          legend: { display: false },
           tooltip: {
             callbacks: {
               label: ctx => ` ₹${ctx.raw.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`,
@@ -60,11 +62,59 @@ export class ChartManager {
             ticks: { color: '#8a8790' },
           },
           y: {
-            grid:      { color: 'rgba(255,255,255,0.04)' },
-            ticks:     { color: '#8a8790',
+            grid: { color: 'rgba(255,255,255,0.04)' },
+            ticks: {
+              color: '#8a8790',
               callback: v => '₹' + v.toLocaleString('en-IN'),
             },
             beginAtZero: true,
+          },
+        },
+      },
+    });
+  }
+
+  // ── Pie Chart: Income Breakdown ──────────────────────────────
+
+  _initIncomePieChart(GlobalChart) {
+    const ctx = document.getElementById('incomePieChart');
+    if (!ctx) return;
+
+    this._incomePieChart = new GlobalChart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: [],
+        datasets: [{
+          data: [],
+          backgroundColor: [
+            'rgba(76,175,138,0.8)',
+            'rgba(201,168,76,0.8)',
+            'rgba(100,140,230,0.8)',
+            'rgba(200,100,200,0.8)',
+          ],
+          borderColor: '#0e0f11',
+          borderWidth: 2,
+          hoverOffset: 8,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '60%',
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: {
+              color: '#8a8790',
+              padding: 12,
+              boxWidth: 12,
+              borderRadius: 3,
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => ` ₹${ctx.raw.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`,
+            },
           },
         },
       },
@@ -80,9 +130,9 @@ export class ChartManager {
     this._pieChart = new GlobalChart(ctx, {
       type: 'doughnut',
       data: {
-        labels:   [],
+        labels: [],
         datasets: [{
-          data:            [],
+          data: [],
           backgroundColor: [
             'rgba(201,168,76,0.8)',
             'rgba(224,92,92,0.8)',
@@ -91,22 +141,22 @@ export class ChartManager {
             'rgba(200,100,200,0.8)',
             'rgba(255,160,80,0.8)',
           ],
-          borderColor:  '#0e0f11',
-          borderWidth:  2,
-          hoverOffset:  8,
+          borderColor: '#0e0f11',
+          borderWidth: 2,
+          hoverOffset: 8,
         }],
       },
       options: {
-        responsive:          true,
+        responsive: true,
         maintainAspectRatio: false,
-        cutout:              '60%',
+        cutout: '60%',
         plugins: {
           legend: {
             position: 'right',
-            labels:   {
-              color:       '#8a8790',
-              padding:     12,
-              boxWidth:    12,
+            labels: {
+              color: '#8a8790',
+              padding: 12,
+              boxWidth: 12,
               borderRadius: 3,
             },
           },
@@ -123,12 +173,14 @@ export class ChartManager {
   // ── Update ───────────────────────────────────────────────────
 
   /**
-   * Refresh both charts with fresh data.
+   * Refresh all charts with fresh data.
    * @param {{ totalIncome: number, totalExpenses: number }} summary
+   * @param {Object.<string, number>} incomeBySubCat
    * @param {Object.<string, number>} expenseBySubCat
    */
-  update(summary, expenseBySubCat) {
+  update(summary, incomeBySubCat, expenseBySubCat) {
     this._updateBar(summary.totalIncome, summary.totalExpenses);
+    this._updateIncomePie(incomeBySubCat);
     this._updatePie(expenseBySubCat);
   }
 
@@ -138,18 +190,29 @@ export class ChartManager {
     this._barChart.update('active');
   }
 
+  _updateIncomePie(incomeBySubCat) {
+    if (!this._incomePieChart) return;
+    const labels = Object.keys(incomeBySubCat);
+    const data = Object.values(incomeBySubCat);
+
+    this._incomePieChart.data.labels = labels;
+    this._incomePieChart.data.datasets[0].data = data;
+    this._incomePieChart.update('active');
+  }
+
   _updatePie(expenseBySubCat) {
     if (!this._pieChart) return;
     const labels = Object.keys(expenseBySubCat);
-    const data   = Object.values(expenseBySubCat);
+    const data = Object.values(expenseBySubCat);
 
-    this._pieChart.data.labels                    = labels;
-    this._pieChart.data.datasets[0].data          = data;
+    this._pieChart.data.labels = labels;
+    this._pieChart.data.datasets[0].data = data;
     this._pieChart.update('active');
   }
 
   destroy() {
     this._barChart?.destroy();
+    this._incomePieChart?.destroy();
     this._pieChart?.destroy();
   }
 }
