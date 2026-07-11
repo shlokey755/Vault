@@ -762,3 +762,29 @@ textarea {
 .app-header {
   padding-top: max(16px, env(safe-area-inset-top));
 }
+
+
+/* ── Dual Pie Chart Layout ── */
+.dual-pie-wrap {
+  display: flex;
+  gap: 16px;
+  height: 100%;
+  flex-wrap: wrap;
+}
+
+.pie-slot {
+  flex: 1 1 260px;
+  position: relative;
+  min-width: 0;
+  min-height: 200px;
+}
+
+.pie-slot canvas {
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .dual-pie-wrap {
+    flex-direction: column;
+  }
+}
