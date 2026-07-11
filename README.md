@@ -10,7 +10,7 @@ Vault is a lightweight, serverless personal finance tracker built entirely using
 
 | Dashboard View | Analytics & Charts |
 | :---: | :---: |
-| <img width="1487" height="962" alt="image" src="https://github.com/user-attachments/assets/a39bb3d7-86e1-44ad-b8b4-c4ee79342235" /> | <img width="600" height="620" alt="image" src="https://github.com/user-attachments/assets/90b9e1f4-17a8-4cc8-accf-9fcf6d8ad44d" /> |
+| <img width="1487" height="962" alt="image" src="pics/dashboard.png" /> | <img width="600" height="620" alt="image" src="pics/analytics.png" /> |
 
 ---
 
