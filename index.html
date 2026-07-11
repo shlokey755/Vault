@@ -4,14 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Vault — Money Manager</title>
+  <title>Vault</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Syne:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="manifest" href="/Vault/manifest.json">
+  <link rel="manifest" href="/manifest.json">
   <!-- ───────────── THEME & STATUS BAR COLORS ──────────── -->
   <meta name="msapplication-config" content="/browserconfig.xml">
   <meta name="theme-color" content="#1a1a2e">
@@ -90,9 +90,14 @@
         </div>
       </div>
       <div class="chart-card">
-        <h3 class="chart-title">Expense Breakdown</h3>
-        <div class="chart-wrap">
-          <canvas id="pieChart"></canvas>
+        <h3 class="chart-title">Income &amp; Expense Breakdown</h3>
+        <div class="dual-pie-wrap">
+          <div class="pie-slot">
+            <canvas id="incomePieChart"></canvas>
+          </div>
+          <div class="pie-slot">
+            <canvas id="pieChart"></canvas>
+          </div>
         </div>
       </div>
     </section>
@@ -112,7 +117,7 @@
           <label for="filterSubCategory">Sub-Category</label>
           <select id="filterSubCategory">
             <option value="all">All</option>
-            <option value="Salary">Salary</option>
+            <option value="Salary">Salaru</option>
             <option value="Allowances">Allowances</option>
             <option value="Bonus">Bonus</option>
             <option value="Petty Cash">Petty Cash</option>
