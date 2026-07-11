@@ -18,7 +18,7 @@
 // ═══ Service Worker Registration ═══
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/Vault/sw.js')
+    navigator.serviceWorker.register('/sw.js')
       .then((registration) => {
         console.log('✓ Service Worker registered successfully!', registration);
 
@@ -73,11 +73,13 @@ function refreshUI() {
     const filters = filterManager.getFilters();
     const visible = txManager.filter(filters);
     const summary = txManager.getSummary();
+    const incBySubCat = txManager.getIncomeBySubCategory();
     const expBySubCat = txManager.getExpenseBySubCategory();
+
 
     uiManager.renderSummary(summary);
     uiManager.renderTable(visible, handleEdit, handleDelete);
-    chartManager.update(summary, expBySubCat);
+    chartManager.update(summary, incBySubCat, expBySubCat);
   } catch (err) {
     console.error('refreshUI error:', err);
     uiManager.showToast('An error occurred while refreshing.', 'error');
