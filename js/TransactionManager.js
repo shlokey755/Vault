@@ -3,7 +3,7 @@
  * Central business-logic layer. Owns the in-memory array,
  * performs CRUD, and delegates persistence to StorageManager.
  */
-import { Transaction }   from './Transaction.js';
+import { Transaction } from './Transaction.js';
 import { StorageManager } from './StorageManager.js';
 
 export class TransactionManager {
@@ -127,11 +127,11 @@ export class TransactionManager {
     // Sort
     result.sort((a, b) => {
       switch (sortBy) {
-        case 'date-asc':    return a.date.localeCompare(b.date);
-        case 'date-desc':   return b.date.localeCompare(a.date);
-        case 'amount-asc':  return a.amount - b.amount;
+        case 'date-asc': return a.date.localeCompare(b.date);
+        case 'date-desc': return b.date.localeCompare(a.date);
+        case 'amount-asc': return a.amount - b.amount;
         case 'amount-desc': return b.amount - a.amount;
-        default:            return b.date.localeCompare(a.date);
+        default: return b.date.localeCompare(a.date);
       }
     });
 
@@ -145,10 +145,10 @@ export class TransactionManager {
    */
   getSummary() {
     const all = this._transactions;
-    const totalIncome   = all.filter(tx => tx.category === 'Income')
-                             .reduce((sum, tx) => sum + tx.amount, 0);
+    const totalIncome = all.filter(tx => tx.category === 'Income')
+      .reduce((sum, tx) => sum + tx.amount, 0);
     const totalExpenses = all.filter(tx => tx.category === 'Expense')
-                             .reduce((sum, tx) => sum + tx.amount, 0);
+      .reduce((sum, tx) => sum + tx.amount, 0);
     return {
       totalIncome,
       totalExpenses,
@@ -160,6 +160,14 @@ export class TransactionManager {
    * Expense totals grouped by sub-category, for charts.
    * @returns {Object.<string, number>}
    */
+  getIncomeBySubCategory() {
+    return this._transactions
+      .filter(tx => tx.category === 'Income')
+      .reduce((acc, tx) => {
+        acc[tx.subCategory] = (acc[tx.subCategory] || 0) + tx.amount;
+        return acc;
+      }, {});
+  }
   getExpenseBySubCategory() {
     return this._transactions
       .filter(tx => tx.category === 'Expense')
