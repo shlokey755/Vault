@@ -1,9 +1,10 @@
 // sw.js — Service Worker for Vault Money Manager PWA
-// This enables offline functionality and caches assets
+// Fixed: Proper local vs external asset filtering for GitHub Pages deployment
 
 const CACHE_NAME = 'vault-v1';
 
 // List all static assets your app needs when offline
+// Local paths use absolute URLs (will be relative to deployment root)
 const ASSETS_TO_CACHE = [
   '/Vault/',
   '/Vault/index.html',
@@ -20,24 +21,41 @@ const ASSETS_TO_CACHE = [
   '/Vault/manifest.json',
   '/Vault/icon-192.png',
   '/Vault/icon-512.png',
+  // External CDNs - these will be network-first, not cached on install
   'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Syne:wght@400;500;600;700&display=swap',
   'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js',
 ];
 
-// Install event: cache all listed assets
+// Install event: cache all local assets safely
 self.addEventListener('install', (event) => {
   console.log('[Service Worker] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[Service Worker] Caching app assets...');
-      // Cache only local assets; external CDN might fail, and that's okay
-      const localAssets = ASSETS_TO_CACHE.filter(asset => !asset.includes('http'));
+
+      // FIX: Correctly separate local paths from external CDNs
+      const localAssets = ASSETS_TO_CACHE.filter(asset => {
+        // If it starts with '/' it's definitely a local absolute path
+        if (asset.startsWith('/')) return true;
+        
+        // If it's a URL, check if it matches our deployment domain origin
+        try {
+          const url = new URL(asset);
+          return url.origin === self.location.origin;
+        } catch (e) {
+          return false;
+        }
+      });
+
+      console.log('[Service Worker] Local assets to cache:', localAssets.length);
+      console.log('[Service Worker] External CDNs (will use network):', ASSETS_TO_CACHE.length - localAssets.length);
+
       return cache.addAll(localAssets).catch((err) => {
-        console.warn('[Service Worker] Some assets could not be cached:', err);
+        console.error('[Service Worker] CRITICAL: Core local assets failed to cache!', err);
+        throw err; // Re-throw so installation fails properly if locals fail
       });
     })
   );
-  // Force the service worker to become active immediately
   self.skipWaiting();
 });
 
@@ -63,7 +81,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
-  // Skip non-GET requests and external API calls (keep them live)
+  // Skip non-GET requests
   if (request.method !== 'GET') {
     return;
   }
@@ -72,8 +90,18 @@ self.addEventListener('fetch', (event) => {
   if (request.url.includes('http') && !request.url.includes(self.location.origin)) {
     event.respondWith(
       fetch(request)
+        .then((networkResponse) => {
+          // Cache successful responses from external sources
+          if (networkResponse && networkResponse.status === 200) {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, responseToCache);
+            });
+          }
+          return networkResponse;
+        })
         .catch(() => {
-          // Offline: return a fallback or cached version
+          // Offline: return cached version if available
           return caches.match(request);
         })
     );
@@ -102,10 +130,8 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         })
         .catch(() => {
-          // If offline and not in cache, show a fallback page
+          // If offline and not in cache
           console.warn(`[Service Worker] Offline, and ${request.url} not in cache`);
-          // Optionally: return a custom offline page
-          // return caches.match('/offline.html');
         });
     })
   );
